@@ -1,0 +1,2 @@
+# rust-katas
+Rust Katas ##
