@@ -8,25 +8,26 @@ Keep in mind the details about UTF-8 encoding!
 use regex::Regex;
 
 fn main() {
-    pig_latin("tupple");
+    let result = pig_latin("tupple");
+    println!("{}", result);
 }
 
-fn pig_latin(str: &str) {
-    let mut result = String::from(str);
+fn pig_latin(str: &str) -> String {
+    let mut pig = String::from(str);
     let reg = Regex::new(r"[aeiou]").unwrap();
 
-    for char in result.chars() {
+    for char in pig.chars() {
         let fst = format!("{}", char);
         if reg.is_match(&fst) {
-            result.push_str("-hay");
+            pig.push_str("-hay");
         } else {
-            result = result.replace(&fst, "");
+            pig = pig.replace(&fst, "");
             let mods = vec!["-", &fst, "ay"];
             for e in mods {
-                result.push_str(e);
+                pig.push_str(e);
             }
         }
         break;
     }
-    println!("{}", result);
+    pig
 }
